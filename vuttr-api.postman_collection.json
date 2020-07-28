@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "f74f2e92-4795-41d1-a31f-160cb3c542d1",
+		"name": "vuttr-api",
+		"description": "Api para gerenciamento de ferramentas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "http://localhost:3000/users/auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "87992341-1760-4e29-a9f6-0530c1e20c3f",
+								"exec": [
+									"if(responseCode.code >= 200 && responseCode.code <= 299){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable('token',jsonData.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"leandro.cabeda@hotmail.com\",\r\n    \"password\":\"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/auth",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"auth"
+							]
+						},
+						"description": "Autentica um usuários com suas credenciais e retorna um token"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/users/create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8764c82c-8871-4269-8568-d466e783e418",
+								"exec": [
+									"if(responseCode.code >= 200 && responseCode.code <= 299){\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable('token',jsonData.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"leandro.cabeda@hotmail.com\",\r\n    \"password\":\"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						},
+						"description": "Cria um novo usuário"
+					},
+					"response": []
+				}
+			],
+			"description": "Modulo dos usuários",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "localhost:3000/tools",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tools",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tools"
+							]
+						},
+						"description": "Lista as ferramentas"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/tools/node",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tools/node",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tools",
+								"node"
+							]
+						},
+						"description": "Lista as ferramentas pela tag especificada"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/tools",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"title\": \"fastify\",\r\n        \"link\": \"https://www.fastify.io/\",\r\n        \"description\": \"Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.\",\r\n        \"tags\": [\r\n            \"web\",\r\n            \"framework\",\r\n            \"node\",\r\n            \"http2\",\r\n            \"https\",\r\n            \"localhost\"\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tools",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tools"
+							]
+						},
+						"description": "Cria uma nova ferramenta"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/tools/1",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tools/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tools",
+								"1"
+							]
+						},
+						"description": "Deleta uma ferramenta pelo id"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/tools/id/1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tools/id/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tools",
+								"id",
+								"1"
+							]
+						},
+						"description": "Retorna uma ferramenta pelo id"
+					},
+					"response": []
+				}
+			],
+			"description": "Modulo das ferramentas",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "941e3dd1-d7b4-4d11-b845-c28e875c8dcc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1e8da1d0-757a-4b1b-942e-5367ff0389f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
